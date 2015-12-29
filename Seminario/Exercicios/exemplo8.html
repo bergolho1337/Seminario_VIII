@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Relógio</title>
+	</head>
+	</br>
+	<body>
+		<h1>Relógio</h2>
+		<canvas width="1000" height="1000">
+			Seu navegador nao tem suporte ao canvas!
+		</canvas>
+		<script>
+			console.log("GG Easy!");
+			var tela = document.getElementsByTagName("canvas")[0];
+			var ctx = tela.getContext("2d");
+			ctx.fillStyle = "rgb(0,0,0)";
+			ctx.font = "20px Arial";
+			var teta, x, y;
+			var minuto, hora, segundo;
+			hora = 0;
+			minuto = 45;
+			segundo = 0;
+			setInterval(desenhaRelogio,1000/60);
+			function desenhaRelogio ()
+			{
+				ctx.clearRect(0,0,1000,1000);
+				for (i = 1; i <= 12; i++)
+				{
+					//console.log("OK");
+					teta = (i*Math.PI/6.0)-(Math.PI/2.0);
+					x = 85*Math.cos(teta);
+					y = 85*Math.sin(teta);
+					ctx.fillText(i.toString(),x+100,y+100);
+				}
+				// Horas
+				teta = (hora*Math.PI/6.0)-(Math.PI/2.0);
+				x = 45*Math.cos(teta);
+				y = 45*Math.sin(teta);
+				ctx.beginPath();
+				ctx.moveTo(107,100);
+				ctx.lineTo(x+107,y+100);
+				ctx.stroke();
+				ctx.closePath();
+				// Minutos
+				teta = (minuto*Math.PI/30.0)-(Math.PI/2.0);
+				x = 65*Math.cos(teta);
+				y = 65*Math.sin(teta);
+				ctx.beginPath();
+				ctx.moveTo(107,100);
+				ctx.lineTo(x+107,y+100);
+				ctx.stroke();
+				ctx.closePath();
+				//console.log(hora + ":" + minuto + ":" + segundo);
+				// Passa tempo
+				segundo++;
+				if (segundo == 60)
+				{
+					segundo = 0;
+					minuto++;
+				}
+				if (minuto == 60)
+				{
+					minuto = 0;
+					hora++;
+				}
+				if (hora == 24)
+				{
+					hora = 0;
+				}
+			}
+						
+		</script>		
+	</body>
+</html>
+
+<!
+	Montar um relógio
+
+	scrip ctrl+shift+J no Brownser = abre javascript console
+	F12 = abre ambiente de desenvolvedor
+
+	GitHub da turma =  ufjf-dcc104
+>

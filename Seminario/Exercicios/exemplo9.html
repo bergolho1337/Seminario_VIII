@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Primeiro Exemplo</title>
+	</head>
+	</br>
+	<body>
+		<h1>Hello World!</h2>
+		<canvas width="500" heigth="500">
+			Seu navegador nao tem suporte ao canvas!
+		</canvas>
+		<script>
+			console.log("GG Easy!");
+			var tela = document.getElementsByTagName("canvas")[0];
+			var ctx = tela.getContext("2d");
+			
+			var fps = 60;
+			var y = 0;
+			var vy = 0;
+			var ay = 0;
+			var dt = 1/fps;
+
+			addEventListener("keydown",teclaPressionada);
+			setInterval(desenhar,1000/fps);
+			function desenhar ()
+			{
+				//ay = 150-y;
+				vy = vy + ay*dt;
+				y = y + vy*dt;
+				
+				/*
+				if (y > 330)
+				{
+					y = -30;
+					vy = 0;
+				}
+				*/
+
+				ctx.clearRect(0,0,400,300);
+				ctx.strokeStyle = "black";
+				ctx.fillStyle = "rgb(0,0,0)";
+				ctx.beginPath();
+				ctx.moveTo(100,30+y);
+				ctx.lineTo(120,30+y);
+				ctx.lineTo(110,y);
+				ctx.closePath();
+				ctx.fill();				
+
+			}
+			function teclaPressionada (e)
+			{
+				console.log("Tecla = " + e.keyCode);
+				if (e.keyCode == 38)
+					ay = -20;
+				else if (e.keyCode == 40)
+					ay = 20;
+					
+			}
+		</script>		
+	</body>
+</html>
+
+<!
+	Montar um relógio
+
+	scrip ctrl+shift+J no Brownser = abre javascript console
+	F12 = abre ambiente de desenvolvedor
+
+	GitHub da turma =  ufjf-dcc104
+>

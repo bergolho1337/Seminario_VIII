@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Exemplo Animaçao com Controle</title>
+	</head>
+	<body>
+		<h1>Exemplo Animaçao com Controle</h1>
+		<canvas width="400" height="300">
+			Seu navegador nao tem suporte ao canvas!
+		</canvas>
+
+		<script>
+			var tela = document.getElementsByTagName("canvas")[0];
+			var ctx = tela.getContext("2d");
+			var fuel = 300;
+			var fps = 60;
+			var g = 30;
+			var y = 130, vy = 0, ay = 0;
+			var x = 130, vx = 0, ax = 0;
+			var dt = 1/fps;
+			var signal, vento, temVento;
+			var alvoY = 150;
+			var alvoX = 150;
+			addEventListener("keydown", teclaPressionada);
+			addEventListener("keyup", teclaSolta);
+			setInterval(desenhar, 1000/fps);
+			function desenhar(){
+				//ax = (alvoX-x)/2 - vx/2;
+				vx = vx + ax*dt;
+				x = x + vx*dt;
+				//ay = (alvoY-y)/2  - vy/2;
+				vy = vy + ay*dt+g*dt;
+				y = y + vy*dt;
+				/*
+				if((y > 150 && ay >0) || (y <50 && ay<0)){
+					ay = -ay;
+				}
+				*/
+				// Mantem objeto parado
+				if(y > 260){
+					y = 260;
+					vy = 0;
+				}
+				ctx.clearRect(0,0, 400, 300);	
+				ctx.strokeStyle = "black";
+				ctx.fillStyle = "rgb(250, 150, 150)";
+				ctx.beginPath();
+				ctx.moveTo(x, 30+y);
+				ctx.lineTo(20+x, 30+y);
+				ctx.lineTo(10+x,y);
+				ctx.closePath();
+				ctx.fill();
+				ctx.stroke();
+				// Desenha barra de combustivel
+				ctx.fillStyle = "green";
+				ctx.fillRect(350,0,10,fuel);
+				// Desenha área de pouso
+				ctx.beginPath();
+				ctx.moveTo(0,200);
+				ctx.lineTo(40,200);
+				ctx.closePath();
+				ctx.fill();
+				ctx.stroke();
+				
+				// Haverá vento ?
+				temVento = Math.random();
+				if (temVento < 0.05)
+				{
+					signal = Math.floor(Math.random()*2+1); 
+					vento = Math.floor(Math.random()*50+1);
+					//if (signal == 2)
+					//	vento *= -1;
+					console.log("Vento = "+vento);
+					console.log("Signal = "+signal);
+					ax = vento;
+				}
+				// Verifica se pousou
+				if (y > 170 && y < 175 && x > 0 && x < 40)
+				{
+					console.log("Vitoria");
+					y = 170;
+					vy = ay = 0;
+					vx = ax = 0;
+				}
+				// Verifica fim de combustivel
+				if (fuel < 0)
+					console.log("DERROTA! Fim de combustivel!");
+			}
+			function teclaPressionada(e){
+				//console.log("Tecla: "+e.keyCode);
+				//console.log("Fuel = "+fuel);
+				//console.log("vy = "+vy);
+				if(e.keyCode==39){
+					ax = 60;
+					fuel--;
+				}else if(e.keyCode==37){
+					ax = -60;
+					fuel--;
+				}
+				if(e.keyCode==40){
+					ay = 30;
+					fuel--;
+				}else if(e.keyCode==38){
+					ay = -60;
+					fuel--;
+				}
+				if(e.keyCode==32){
+					vy = -60;
+				}
+			}
+			function teclaSolta(e){
+				//console.log("Tecla: "+e.keyCode);
+				if(e.keyCode==39){
+					ax = 0;
+				}else if(e.keyCode==37){
+					ax = 0;
+				}
+				if(e.keyCode==40){
+					ay = 0;
+				}else if(e.keyCode==38){
+					ay = 0;
+				}
+			}
+		</script>
+	</body>
+</html> 

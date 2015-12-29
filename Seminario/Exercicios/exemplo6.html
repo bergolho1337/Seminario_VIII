@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Primeiro Exemplo</title>
+	</head>
+	</br>
+	<body>
+		<h1>Hello World!</h2>
+		<canvas width="500" heigth="500">
+			Seu navegador nao tem suporte ao canvas!
+		</canvas>
+		<script>
+			console.log("GG Easy!");
+			var tela = document.getElementsByTagName("canvas")[0];
+			var ctx = tela.getContext("2d");
+			ctx.fillStyle = "rgb(150,150,205)";
+			
+			ctx.beginPath();
+			//ctx.moveTo(190,170);
+			//ctx.lineTo(210,170);
+			//ctx.lineTo(200,140);
+
+			ctx.arc(200,100,50,Math.PI/2,2*Math.PI,false);
+			ctx.lineTo(200,150);
+
+			ctx.closePath();
+
+			ctx.fill();
+			ctx.stroke();
+		</script>		
+	</body>
+</html>
+
+<!
+	scrip ctrl+shift+J no Brownser = abre javascript console
+	F12 = abre ambiente de desenvolvedor
+
+	GitHub da turma =  ufjf-dcc104
+>

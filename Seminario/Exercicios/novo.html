@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Manipulação de Eixos</title>
+		<script type="text/javascript" src="sprite.js"></script>
+	</head>
+		<h1>Manipulação de Eixos</h1>
+		<canvas width="400" height="300">
+			Seu navegador nao tem suporte ao canvas!
+		</canvas>
+
+		<script>
+			var tela = document.getElementsByTagName("canvas")[0];
+			var ctx = tela.getContext("2d");
+			var pc = new Sprite();
+			
+			var fps = 60;
+			var g = 60;
+			var dt = 1/fps;
+
+			setInterval(passo,1000/fps);
+			funciton passo ()
+			{
+				ctx.fillStyle = "black";
+				ctx.fillRect(0,0,tela.width,tela.height);
+				pc.desenhar(ctx);
+			}	
+		</script>
+</html> 

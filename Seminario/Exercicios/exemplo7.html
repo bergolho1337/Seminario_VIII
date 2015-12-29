@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Primeiro Exemplo</title>
+	</head>
+	</br>
+	<body>
+		<h1>Hello World!</h2>
+		<canvas width="500" heigth="500">
+			Seu navegador nao tem suporte ao canvas!
+		</canvas>
+		<script>
+			console.log("GG Easy!");
+			var tela = document.getElementsByTagName("canvas")[0];
+			var ctx = tela.getContext("2d");
+			ctx.fillStyle = "rgb(150,150,205)";
+			
+			var i = 0, s;
+			setInterval(desenhaTriangulo,1000/30);
+			s = 1;
+			function desenhaTriangulo ()
+			{
+				ctx.clearRect(0,0,400,300);
+				ctx.beginPath();
+				
+				if (i == 10) s = 0;
+				else if (i == 0) s = 1;
+			
+				ctx.moveTo(0,30+i*10);
+				ctx.lineTo(20,30+i*10);
+				ctx.lineTo(10,0+i*10);
+				ctx.closePath();
+
+				ctx.fill();
+				ctx.stroke();
+				if (s == 1) i++;
+				else i--;
+			}
+		</script>		
+	</body>
+</html>
+
+<!
+	Montar um relógio
+
+	scrip ctrl+shift+J no Brownser = abre javascript console
+	F12 = abre ambiente de desenvolvedor
+
+	GitHub da turma =  ufjf-dcc104
+>
